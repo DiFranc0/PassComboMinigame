@@ -1,0 +1,47 @@
+using UnityEditor.U2D.Aseprite;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerScript : MonoBehaviour
+{
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] Transform kickPoint;
+    [SerializeField] private string ballTag;
+
+    private Vector2 mousePos;
+    private Animator playerAnimator;
+
+    private void Start()
+    {
+        playerAnimator = GetComponent<Animator>();
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+    }
+
+    private void Update()
+    {
+        RotatePlayer();
+    }
+
+    private void RotatePlayer()
+    {
+        mousePos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+
+        Vector3 direction = mousePos - (Vector2)transform.position;
+        direction.z = 0; // Ensure the z component is zero for 2D rotation
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        transform.eulerAngles = new Vector3(0, 0, angle);
+    }
+
+    private void OnAttack()
+    {
+        ObjectPoolManager.Instance.SpawnFromPool(ballTag, kickPoint.position, kickPoint.rotation);
+        playerAnimator.SetTrigger("pKick");
+    }
+
+    
+}
