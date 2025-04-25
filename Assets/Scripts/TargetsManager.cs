@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TargetsManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] teammates;
+   /* [SerializeField] private GameObject[] teammates;
     private float targetActiveTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,6 +29,6 @@ public class TargetsManager : MonoBehaviour
 
         StartCoroutine(ActivateTargetCoroutine());
 
-    }
+    }*/
 
 }

@@ -6,7 +6,7 @@ public class DifficultySettings : ScriptableObject
     public enum Difficulty { Easy, Medium, Hard }
 
     [Header("Game Parameters")]
-    public float mistakePointLoss = 1f;
+    public int mistakePointLoss = 1;
     public int teammateCount = 4;
     public float targetSize = 1f;
     public float targetActiveTime = 1f;
@@ -26,14 +26,15 @@ public class DifficultySettings : ScriptableObject
         targetSize = preset.targetSize;
         targetActiveTime = preset.targetActiveTime;
         comboPatternsEnabled = preset.comboPatternsEnabled;
-        numberOfPassesToCombo = preset.extraComboPoints;
+        numberOfPassesToCombo = preset.numberOfPassesToCombo;
+        extraComboPoints = preset.extraComboPoints;
     }
 
     [System.Serializable]
     public class DifficultyPreset
     {
         public string name;
-        public float mistakePointLoss;
+        public int mistakePointLoss;
         public int teammateCount;
         public float targetSize;
         public float targetActiveTime;
