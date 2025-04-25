@@ -1,5 +1,7 @@
+using System;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerScript : MonoBehaviour
@@ -11,6 +13,7 @@ public class PlayerScript : MonoBehaviour
     private Vector2 mousePos;
     private Animator playerAnimator;
 
+    public static event Action OnMistakeMade;
     private void Start()
     {
         playerAnimator = GetComponent<Animator>();
@@ -39,8 +42,26 @@ public class PlayerScript : MonoBehaviour
 
     private void OnAttack()
     {
-        ObjectPoolManager.Instance.SpawnFromPool(ballTag, kickPoint.position, kickPoint.rotation);
-        playerAnimator.SetTrigger("pKick");
+        Vector2 clickPos = Mouse.current.position.ReadValue();
+        RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(clickPos), Vector2.zero);
+        if (hit.collider != null)
+        {
+            if (hit.collider.CompareTag("Target"))
+            {
+                hit.collider.GetComponent<TargetController>().Hit();
+                ObjectPoolManager.Instance.SpawnFromPool(ballTag, kickPoint.position, kickPoint.rotation);
+                playerAnimator.SetTrigger("pKick");
+                return;
+            }
+        }
+        else
+        {
+            Debug.Log("Mistake Made");
+            playerAnimator.SetTrigger("pSlip");
+            OnMistakeMade?.Invoke();
+        }
+        //ObjectPoolManager.Instance.SpawnFromPool(ballTag, kickPoint.position, kickPoint.rotation);
+        //playerAnimator.SetTrigger("pKick");
     }
 
     

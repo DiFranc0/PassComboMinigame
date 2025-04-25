@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0990a6b885c4e584bb12e58bfe968388, type: 3}
   m_Name: DifficultySettings
   m_EditorClassIdentifier: 
-  mistakePointLoss: 0
-  teammateCount: 4
-  targetSize: 0.6596671
+  mistakePointLoss: 1
+  teammateCount: 6
+  targetSize: 0.65
   targetActiveTime: 1.5
   comboPatternsEnabled: 0
-  numberOfPassesToCombo: 0
-  extraComboPoints: 0
+  numberOfPassesToCombo: 3
+  extraComboPoints: 2
   presets:
   - name: Easy
     mistakePointLoss: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
   - name: Medium
     mistakePointLoss: 1
     teammateCount: 6
-    targetSize: 0.36
+    targetSize: 0.45
     targetActiveTime: 1
     comboPatternsEnabled: 0
     numberOfPassesToCombo: 3
@@ -39,7 +39,7 @@ MonoBehaviour:
   - name: Hard
     mistakePointLoss: 2
     teammateCount: 6
-    targetSize: 0.36
+    targetSize: 0.4
     targetActiveTime: 0.5
     comboPatternsEnabled: 1
     numberOfPassesToCombo: 5

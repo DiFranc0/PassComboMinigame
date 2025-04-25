@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -6172589030257936016, guid: 7c2b6fb5185b2b348ac1f46f40a0fb83, type: 3}
   m_Color: {r: 0.9559706, g: 0.482, b: 1, a: 1}
   m_FlipX: 0
@@ -102,11 +102,11 @@ GameObject:
   - component: {fileID: 6662090230989574464}
   m_Layer: 0
   m_Name: Target
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7420163493316675882
 Transform:
   m_ObjectHideFlags: 0

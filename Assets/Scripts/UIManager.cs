@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+//using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,12 +10,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text comboText;
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] public Slider loadingBar;
 
-    public ProgressBar loadingBar;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        comboText.text = "";
+        if (comboText != null) 
+            comboText.text = "";
+
+        if(loadScreen != null)
+            loadingBar = loadScreen.GetComponentInChildren<Slider>();
     }
 
     private void OnEnable()

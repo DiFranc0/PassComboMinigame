@@ -13,11 +13,13 @@ public class ScoreManager : MonoBehaviour
     private void OnEnable()
     {
         TargetController.OnTargetHit += AddScore;
+        PlayerScript.OnMistakeMade += MadeMistake;
     }
 
     private void OnDisable()
     {
         TargetController.OnTargetHit -= AddScore;
+        PlayerScript.OnMistakeMade -= MadeMistake;
     }
 
     private void Start()
@@ -26,6 +28,11 @@ public class ScoreManager : MonoBehaviour
 
         score = 0;
         comboCount = 0;
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void AddScore()
