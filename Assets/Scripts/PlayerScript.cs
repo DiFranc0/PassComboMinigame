@@ -58,6 +58,14 @@ public class PlayerScript : MonoBehaviour
                 audioSource.Play();
                 return;
             }
+            else
+            {
+                Debug.Log("Not a target");
+                playerAnimator.SetTrigger("pSlip");
+                audioSource.clip = playerSounds[1];
+                audioSource.Play();
+                OnMistakeMade?.Invoke();
+            }
         }
         else
         {
