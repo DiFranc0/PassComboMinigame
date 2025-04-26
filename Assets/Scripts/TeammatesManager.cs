@@ -6,14 +6,15 @@ using UnityEngine;
 public class TeammatesManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] teammates;
+    private float delayToActiv = 0.5f; // Delay before activating the target
     private float targetActiveTime;
-    private float comboPatternActivationChance = 0.5f; // 50% chance to activate combo pattern
+    private float comboPatternActivationChance = 0.3f; // 30% chance to activate combo pattern
+    private bool comboPatternActive = false; // Flag to check if combo pattern is active
     private List<GameObject> activeTeammates = new List<GameObject>();
 
 
     private void OnEnable()
     {
-        TargetController.OnTargetHit += () => StopAllCoroutines();
         TargetController.OnTargetHit += CheckCoroutineToStart;
     }
 
@@ -57,6 +58,13 @@ public class TeammatesManager : MonoBehaviour
 
     private void CheckCoroutineToStart()
     {
+        if (comboPatternActive)
+        {
+            return; // If combo pattern is active, do not start a new coroutine
+        }
+
+        StopAllCoroutines(); // Stop any existing coroutines
+
         float randomValue = Random.value;
 
         if (GameManager.Instance.difficultySettings.comboPatternsEnabled &&
@@ -73,7 +81,7 @@ public class TeammatesManager : MonoBehaviour
     private IEnumerator ActivateTargetCoroutine()
     {
         WaitForSeconds waitTime = new WaitForSeconds(targetActiveTime);
-        WaitForSeconds delayToActivate = new WaitForSeconds(0.5f);
+        WaitForSeconds delayToActivate = new WaitForSeconds(delayToActiv);
         GameObject target = activeTeammates[Random.Range(0, activeTeammates.Count)].transform.GetChild(0).gameObject;
 
         yield return delayToActivate;
@@ -87,9 +95,11 @@ public class TeammatesManager : MonoBehaviour
 
     private IEnumerator ActivateComboPattern()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(targetActiveTime);
-        WaitForSeconds delayToActivate = new WaitForSeconds(0.5f);
+        comboPatternActive = true;
+
+        WaitForSeconds delayToActivate = new WaitForSeconds(delayToActiv);
         List<GameObject> randomTeammates = GetRandomTeammates(activeTeammates, 4);
+        WaitForSeconds waitTime = new WaitForSeconds(targetActiveTime * randomTeammates.Count);
 
         yield return delayToActivate;
         foreach (GameObject teammate in randomTeammates)
@@ -102,6 +112,7 @@ public class TeammatesManager : MonoBehaviour
             teammate.transform.GetChild(0).gameObject.SetActive(false);
         }
 
+        comboPatternActive = false;
         CheckCoroutineToStart();
 
     }

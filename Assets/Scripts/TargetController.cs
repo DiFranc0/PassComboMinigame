@@ -1,16 +1,21 @@
 using DG.Tweening;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TargetController : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer targetSprite;
+    [SerializeField] private TMP_Text perfectText;
     [SerializeField] private float scaleSize = 1.2f;
     [SerializeField] private float originalSize = 1f; // Original size of the target
     [SerializeField] private float pulseDuration = 0.5f;
+    private float reactionTime;
+    private float targetActiveTime;
+    private SpriteRenderer targetSprite;
 
     public static event Action OnTargetHit;
+    public static event Action OnPerfectPass;
 
     private void Awake()
     {
@@ -24,6 +29,7 @@ public class TargetController : MonoBehaviour
 
     private void OnEnable()
     {
+        StartTimer();
         // Create an infinite pulsating sequence
         Sequence pulseSequence = DOTween.Sequence();
         pulseSequence.Append(targetSprite.transform.DOScale(scaleSize, pulseDuration).SetEase(Ease.InOutSine));
@@ -39,15 +45,38 @@ public class TargetController : MonoBehaviour
     }
 
 
-    private void Start()
+    void StartTimer()
     {
+        targetActiveTime = Time.time;
+       
+    }
+
+    void CalculateReactionTime()
+    {
+        reactionTime = (Time.time - targetActiveTime) * 1000;
+        Debug.Log("Rection time:" + reactionTime);
         
-        
+        // Perfect timing bonus
+        if (reactionTime < 500)
+        {
+            float originalTextScale = perfectText.transform.localScale.x;
+
+            perfectText.gameObject.SetActive(true);
+
+            perfectText.transform.DOScale(0.5f, pulseDuration).SetEase(Ease.InOutSine).OnComplete(() =>
+            {
+                perfectText.gameObject.SetActive(false);
+                perfectText.transform.localScale = new Vector3(originalTextScale, originalTextScale, originalTextScale);
+            });
+            OnPerfectPass?.Invoke();
+        }
+
+        gameObject.SetActive(false);
     }
 
     public void Hit()
     {
-        gameObject.SetActive(false);
+        CalculateReactionTime();
         OnTargetHit?.Invoke();
     }
 }

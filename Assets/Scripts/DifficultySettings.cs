@@ -13,6 +13,7 @@ public class DifficultySettings : ScriptableObject
     public bool comboPatternsEnabled = false;
     public int numberOfPassesToCombo = 3;
     public int extraComboPoints = 0;
+    public int perfectTimingBonus = 5;
 
 
     [Header("Difficulty Presets")]
@@ -28,6 +29,7 @@ public class DifficultySettings : ScriptableObject
         comboPatternsEnabled = preset.comboPatternsEnabled;
         numberOfPassesToCombo = preset.numberOfPassesToCombo;
         extraComboPoints = preset.extraComboPoints;
+        perfectTimingBonus = preset.perfectTimingBonus;
     }
 
     [System.Serializable]
@@ -41,5 +43,6 @@ public class DifficultySettings : ScriptableObject
         public bool comboPatternsEnabled;
         public int numberOfPassesToCombo;
         public int extraComboPoints;
+        public int perfectTimingBonus;
     }
 }

@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mistakePointLoss: 1
   teammateCount: 6
-  targetSize: 0.65
-  targetActiveTime: 1.5
+  targetSize: 0.45
+  targetActiveTime: 1
   comboPatternsEnabled: 0
   numberOfPassesToCombo: 3
   extraComboPoints: 2
+  perfectTimingBonus: 0
   presets:
   - name: Easy
     mistakePointLoss: 0
@@ -28,6 +29,7 @@ MonoBehaviour:
     comboPatternsEnabled: 0
     numberOfPassesToCombo: 0
     extraComboPoints: 0
+    perfectTimingBonus: 5
   - name: Medium
     mistakePointLoss: 1
     teammateCount: 6
@@ -36,6 +38,7 @@ MonoBehaviour:
     comboPatternsEnabled: 0
     numberOfPassesToCombo: 3
     extraComboPoints: 2
+    perfectTimingBonus: 5
   - name: Hard
     mistakePointLoss: 2
     teammateCount: 6
@@ -44,3 +47,4 @@ MonoBehaviour:
     comboPatternsEnabled: 1
     numberOfPassesToCombo: 5
     extraComboPoints: 3
+    perfectTimingBonus: 5
