@@ -48,6 +48,16 @@ public class UIManager : MonoBehaviour
         
     }
 
+    public void StartGameButton()
+    {
+        GameManager.Instance.StartGame();
+    }
+
+    public void QuitGameButton()
+    {
+        GameManager.Instance.QuitGame();
+    }
+
     public void ShowLoadScreen()
     {
         loadScreen.SetActive(true);
@@ -128,6 +138,7 @@ public class UIManager : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         scoreTextGameOver.text = scoreText.text;
-        // Show game over screen
+        Time.timeScale = 0; // Pause the game
+        
     }
 }

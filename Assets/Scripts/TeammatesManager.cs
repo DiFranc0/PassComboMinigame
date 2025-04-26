@@ -101,12 +101,14 @@ public class TeammatesManager : MonoBehaviour
         List<GameObject> randomTeammates = GetRandomTeammates(activeTeammates, 4);
         WaitForSeconds waitTime = new WaitForSeconds(targetActiveTime * randomTeammates.Count);
 
+        // Activate targets for the combo pattern after delay
         yield return delayToActivate;
-        foreach (GameObject teammate in randomTeammates)
+        for (int i = 0; i < randomTeammates.Count; i++)
         {
-            teammate.transform.GetChild(0).gameObject.SetActive(true);
+            randomTeammates[i].transform.GetChild(0).gameObject.SetActive(true);
+            yield return new WaitForSeconds(targetActiveTime);
         }
-        yield return waitTime;
+        
         foreach (GameObject teammate in randomTeammates)
         {
             teammate.transform.GetChild(0).gameObject.SetActive(false);

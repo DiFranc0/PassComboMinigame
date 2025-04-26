@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class BallScript : MonoBehaviour, IPooledProjectile
@@ -11,6 +12,15 @@ public class BallScript : MonoBehaviour, IPooledProjectile
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        transform.DOLocalRotate(new Vector3(0, 0, 360), 0.5f).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+    }
+
+    private void OnDisable()
+    {
+        transform.DOKill();
+    }
     private void Update()
     {
         timeAlive += Time.deltaTime;

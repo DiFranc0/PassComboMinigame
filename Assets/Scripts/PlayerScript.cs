@@ -9,7 +9,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] Transform kickPoint;
     [SerializeField] private string ballTag;
+    [SerializeField] private AudioClip[] playerSounds;
 
+    private AudioSource audioSource;
     private Vector2 mousePos;
     private Animator playerAnimator;
 
@@ -17,6 +19,7 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         playerAnimator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
@@ -51,6 +54,8 @@ public class PlayerScript : MonoBehaviour
                 hit.collider.GetComponent<TargetController>().Hit();
                 ObjectPoolManager.Instance.SpawnFromPool(ballTag, kickPoint.position, kickPoint.rotation);
                 playerAnimator.SetTrigger("pKick");
+                audioSource.clip = playerSounds[0];
+                audioSource.Play();
                 return;
             }
         }
@@ -58,6 +63,8 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("Mistake Made");
             playerAnimator.SetTrigger("pSlip");
+            audioSource.clip = playerSounds[1];
+            audioSource.Play();
             OnMistakeMade?.Invoke();
         }
         //ObjectPoolManager.Instance.SpawnFromPool(ballTag, kickPoint.position, kickPoint.rotation);

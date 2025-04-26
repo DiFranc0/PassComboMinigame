@@ -10,6 +10,8 @@ public class TargetController : MonoBehaviour
     [SerializeField] private float scaleSize = 1.2f;
     [SerializeField] private float originalSize = 1f; // Original size of the target
     [SerializeField] private float pulseDuration = 0.5f;
+    [SerializeField] private AudioClip[] targetSounds;
+    private AudioSource audioSource;
     private float reactionTime;
     private float targetActiveTime;
     private SpriteRenderer targetSprite;
@@ -25,6 +27,7 @@ public class TargetController : MonoBehaviour
         scaleSize = originalSize * 1.2f; // Set the scale size to 20% larger than the original size
         targetSprite = gameObject.GetComponent<SpriteRenderer>();
         pulseDuration = GameManager.Instance.difficultySettings.targetActiveTime / 2;
+        audioSource = GetComponentInParent<AudioSource>();
     }
 
     private void OnEnable()
@@ -62,6 +65,8 @@ public class TargetController : MonoBehaviour
             float originalTextScale = perfectText.transform.localScale.x;
 
             perfectText.gameObject.SetActive(true);
+            audioSource.clip = targetSounds[0];
+            audioSource.Play();
 
             perfectText.transform.DOScale(0.5f, pulseDuration).SetEase(Ease.InOutSine).OnComplete(() =>
             {
