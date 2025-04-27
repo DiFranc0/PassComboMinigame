@@ -12,7 +12,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private AudioClip[] playerSounds;
 
     private AudioSource audioSource;
-    private Vector2 mousePos;
     private Animator playerAnimator;
 
     public static event Action OnMistakeMade;
@@ -33,10 +32,18 @@ public class PlayerScript : MonoBehaviour
 
     private void RotatePlayer()
     {
-        mousePos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 pointerPos = Vector2.zero;
 
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.IsPressed())
+        {
+            pointerPos = mainCamera.ScreenToWorldPoint(Touchscreen.current.primaryTouch.position.ReadValue());
+        }
+        else if (Mouse.current != null)
+        {
+            pointerPos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        }
 
-        Vector3 direction = mousePos - (Vector2)transform.position;
+        Vector3 direction = pointerPos - (Vector2)transform.position;
         direction.z = 0; // Ensure the z component is zero for 2D rotation
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
@@ -45,8 +52,19 @@ public class PlayerScript : MonoBehaviour
 
     private void OnAttack()
     {
-        Vector2 clickPos = Mouse.current.position.ReadValue();
+        Vector2 clickPos = Vector2.zero;
+
+        if (Touchscreen.current != null)
+        {
+            clickPos = Touchscreen.current.primaryTouch.position.ReadValue();
+        }
+        else if (Mouse.current != null)
+        {
+            clickPos = Mouse.current.position.ReadValue();
+        }
+
         RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(clickPos), Vector2.zero);
+
         if (hit.collider != null)
         {
             if (hit.collider.CompareTag("Target"))
