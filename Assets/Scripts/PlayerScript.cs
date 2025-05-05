@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -33,8 +32,8 @@ public class PlayerScript : MonoBehaviour
     private void RotatePlayer()
     {
         Vector2 pointerPos = Vector2.zero;
-
-        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.IsPressed())
+        
+        if (Touchscreen.current != null)
         {
             pointerPos = mainCamera.ScreenToWorldPoint(Touchscreen.current.primaryTouch.position.ReadValue());
         }
@@ -52,11 +51,13 @@ public class PlayerScript : MonoBehaviour
 
     private void OnAttack()
     {
+        Debug.Log("Attack");
         Vector2 clickPos = Vector2.zero;
 
         if (Touchscreen.current != null)
         {
             clickPos = Touchscreen.current.primaryTouch.position.ReadValue();
+            RotatePlayer();
         }
         else if (Mouse.current != null)
         {
@@ -69,6 +70,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (hit.collider.CompareTag("Target"))
             {
+                Debug.Log("Hit a target");
                 hit.collider.GetComponent<TargetController>().Hit();
                 ObjectPoolManager.Instance.SpawnFromPool(ballTag, kickPoint.position, kickPoint.rotation);
                 playerAnimator.SetTrigger("pKick");

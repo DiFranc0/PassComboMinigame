@@ -33,7 +33,7 @@ MonoBehaviour:
   - name: Medium
     mistakePointLoss: 1
     teammateCount: 6
-    targetSize: 0.45
+    targetSize: 0.55
     targetActiveTime: 1
     comboPatternsEnabled: 0
     numberOfPassesToCombo: 3
@@ -42,7 +42,7 @@ MonoBehaviour:
   - name: Hard
     mistakePointLoss: 2
     teammateCount: 6
-    targetSize: 0.4
+    targetSize: 0.5
     targetActiveTime: 0.5
     comboPatternsEnabled: 1
     numberOfPassesToCombo: 5

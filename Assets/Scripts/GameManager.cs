@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        QualitySettings.vSyncCount = 0; // Disable VSync
+        Application.targetFrameRate = 60; // Set target frame rate to 60 FPS
+
         Time.timeScale = 1f;
         StartCoroutine(LoadGameScene());
     }

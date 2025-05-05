@@ -166,6 +166,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -622,7 +635,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      triangle-04-whole_0: 2451585178291368193
+      triangle-04-whole_1: 5096617955871393955
+      triangle-04-whole_10: 9015013813936225509
+      triangle-04-whole_11: -736502607449782270
+      triangle-04-whole_12: -8915798362526174506
+      triangle-04-whole_13: 795211803380880386
+      triangle-04-whole_14: -8117652370313620376
+      triangle-04-whole_15: -5362469159083440698
+      triangle-04-whole_16: -805715306892924358
+      triangle-04-whole_17: 4318585625929224915
+      triangle-04-whole_18: 3687789245992581875
+      triangle-04-whole_19: 4957003350837047652
+      triangle-04-whole_2: -2108119759264865064
+      triangle-04-whole_3: -3946895111750378565
+      triangle-04-whole_4: -5088668365887802081
+      triangle-04-whole_5: -3151747706175324366
+      triangle-04-whole_6: -2248069895563167588
+      triangle-04-whole_7: 4705913151505811744
+      triangle-04-whole_8: -7767103521999339224
+      triangle-04-whole_9: -6495180403054363235
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
